@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gaze fly</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="toolbar">
+    <div class="group">
+      <button type="button" id="btnCamStart" class="primary">Start camera</button>
+      <button type="button" id="btnCamStop" disabled>Stop camera</button>
+    </div>
+    <div class="group">
+      <button type="button" id="btnCalib" disabled>Calibrate</button>
+      <button type="button" id="btnAccuracy" disabled>Check accuracy</button>
+      <button type="button" id="btnCancelProto" disabled>Cancel</button>
+      <button type="button" id="btnResetCalib" disabled>Reset calibration</button>
+    </div>
+    <div class="group">
+      <button type="button" id="btnTrain">Train fly controller</button>
+      <button type="button" id="btnPause">Pause</button>
+    </div>
+    <label class="toggle" title="Uses mouse as gaze; still drives the real backend">
+      <input type="checkbox" id="pointerMode" /> Pointer test
+    </label>
+    <label class="toggle">
+      <input type="checkbox" id="hidePip" /> Hide preview
+    </label>
+    <details id="about">
+      <summary>About</summary>
+      <p>
+        162,517 neurons; original traced, typed graph; learned output readout;
+        artificial four-channel input; simplified LIF dynamics.
+        Camera calibration and controller training are different.
+        Closed-loop drive applies a fixed sensory gain (4×) on gaze error before the motor step.
+      </p>
+    </details>
+    <div id="status">Start the camera, then run a fresh calibration (~40s).</div>
+  </div>
+  <p id="intro">
+    Camera frames stay in your browser for calibration; only fly motor commands are sent to the backend.
+    Keep this window on the screen you will use, then run <strong>Calibrate</strong> and <strong>Check accuracy</strong> on unseen dots before relying on the gaze marker.
+  </p>
+  <div id="telemetry">Backend: — · Fly: — · Gaze: — · Camera: off</div>
+  <div id="stage-wrap">
+    <canvas id="stage" aria-label="Flight field"></canvas>
+    <canvas id="pip" width="320" height="240" aria-label="Camera preview"></canvas>
+    <div id="overlay" class="hidden"></div>
+  </div>
+  <video id="cam" playsinline muted autoplay></video>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
